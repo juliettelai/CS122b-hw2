@@ -46,10 +46,15 @@ public class BasicController
         {
             throw new ResultError(BasicResults.STRING_IS_EMPTY);
         }
+        // need to check regex
+        if (!message.matches("^[a-zA-Z0-9]-+$"))
+        {
+            throw new ResultError(BasicResults.STRING_CONTAINS_INVALID_CHARACTERS);
+        }
 
         ReverseResponse response  = new ReverseResponse()
                 .setResult(BasicResults.STRING_SUCCESSFULLY_REVERSED)
-                .setMessage("test");
+                .setMessage(message);
 
         // need to actually reverse string
         return response.toResponse();
